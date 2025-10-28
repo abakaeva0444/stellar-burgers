@@ -4,10 +4,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Example/OrderInfo',
   component: OrderInfoUI,
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
-    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'fullscreen'
   }
 } satisfies Meta<typeof OrderInfoUI>;
@@ -18,8 +16,9 @@ type Story = StoryObj<typeof meta>;
 export const DefaultOrderInfo: Story = {
   args: {
     orderInfo: {
-      ingredientsInfo: {
-        bun: {
+      // Преобразуем в массив
+      ingredientsInfo: [
+        {
           _id: '211',
           name: 'Булка',
           type: 'bun',
@@ -32,17 +31,45 @@ export const DefaultOrderInfo: Story = {
           image_large: '',
           image_mobile: '',
           count: 2
+        },
+        {
+          _id: '212',
+          name: 'Котлета',
+          type: 'main',
+          proteins: 20,
+          fat: 15,
+          carbohydrates: 30,
+          calories: 250,
+          price: 45,
+          image: '',
+          image_large: '',
+          image_mobile: '',
+          count: 1
+        },
+        {
+          _id: '213',
+          name: 'Сыр',
+          type: 'main',
+          proteins: 15,
+          fat: 25,
+          carbohydrates: 5,
+          calories: 180,
+          price: 22,
+          image: '',
+          image_large: '',
+          image_mobile: '',
+          count: 1
         }
-      },
+      ],
       date: new Date('2024-01-25'),
       total: 134,
       _id: '233',
-      status: 'ready',
+      status: 'done', // Изменено на 'done' для корректного отображения статуса
       name: 'Order',
       createdAt: '',
       updatedAt: '',
       number: 2,
-      ingredients: ['Булка', 'Начинка']
+      ingredients: ['211', '212', '213']
     }
   }
 };

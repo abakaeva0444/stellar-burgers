@@ -1,9 +1,12 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useEffect } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useSelector, useDispatch } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
-import { createOrder } from '../../services/slices/orderBurgerSlice';
+import {
+  createOrder,
+  clearOrder
+} from '../../services/slices/orderBurgerSlice';
 import { clearConstructor } from '../../services/slices/constructorSlice';
 
 export const BurgerConstructor: FC = () => {
@@ -22,6 +25,14 @@ export const BurgerConstructor: FC = () => {
     loading: false
   };
   const { user } = useSelector((store) => store.auth) || { user: null };
+
+  // Очищаем конструктор при успешном создании заказа
+  useEffect(() => {
+    if (orderModalData && orderModalData.number) {
+      // Заказ успешно создан - очищаем конструктор
+      dispatch(clearConstructor());
+    }
+  }, [orderModalData, dispatch]);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
@@ -44,7 +55,9 @@ export const BurgerConstructor: FC = () => {
   };
 
   const closeOrderModal = () => {
-    dispatch(clearConstructor());
+    // При закрытии модального окна очищаем только данные заказа,
+    // но не очищаем конструктор
+    dispatch(clearOrder());
   };
 
   const price = useMemo(

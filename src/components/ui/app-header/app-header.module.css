@@ -1,37 +1,45 @@
 .header {
   background-color: var(--background);
+  width: 100%;
 }
-.menu {
-  display: flex;
-  align-items: center;
+
+.container {
   max-width: 1240px;
-  height: 56px;
   margin: 0 auto;
 }
 
-.menu_part_left {
+.nav {
   display: flex;
-  flex-basis: 35%;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.leftMenu {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+}
+
+.rightMenu {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .link {
   display: flex;
+  align-items: center;
   text-decoration: none;
   color: var(--text-inactive-color);
+  border-radius: 40px;
 }
 
-.link_active {
+.linkActive {
   color: var(--text-primary-color);
-}
-
-.link_position_last {
-  display: flex;
-  justify-content: flex-end;
-  flex-basis: 35%;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  margin: 0 auto;
 }

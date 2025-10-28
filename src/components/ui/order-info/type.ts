@@ -5,9 +5,7 @@ export type OrderInfoUIProps = {
 };
 
 type TOrderInfo = {
-  ingredientsInfo: {
-    [key: string]: TIngredient & { count: number };
-  };
+  ingredientsInfo: Array<TIngredient & { count: number }>; // Изменяем на массив
   date: Date;
   total: number;
   _id: string;

@@ -61,11 +61,24 @@ export const OrderInfo: FC = () => {
       0
     );
 
+    // Преобразуем ingredientsInfo в массив для соответствия типу
+    const ingredientsInfoArray = Object.values(ingredientsInfo);
+
     return {
       ...order,
-      ingredientsInfo,
+      ingredientsInfo: ingredientsInfoArray, // Теперь это массив
       date,
-      total
+      total,
+      number: order.number,
+      status: order.status,
+      statusText:
+        order.status === 'done'
+          ? 'Выполнен'
+          : order.status === 'pending'
+            ? 'Готовится'
+            : order.status === 'created'
+              ? 'Создан'
+              : 'Отменен'
     };
   }, [order, ingredients]);
 

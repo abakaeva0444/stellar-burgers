@@ -1,13 +1,22 @@
 import { Middleware, MiddlewareAPI } from 'redux';
 import { RootState, AppDispatch } from '../store';
 
+// Базовые типы для WebSocket сообщений
+export type TWsMessage = {
+  success?: boolean;
+  orders: any[];
+  total?: number;
+  totalToday?: number;
+  message?: string;
+};
+
 export type TWsActions = {
   wsInit: string;
   wsSendMessage?: string;
   onOpen: (event: Event) => { type: string };
   onClose: (event: CloseEvent) => { type: string };
   onError: (event: Event) => { type: string; payload: Event };
-  onMessage: (data: any) => { type: string; payload: any };
+  onMessage: (data: TWsMessage) => { type: string; payload: TWsMessage };
 };
 
 export const socketMiddleware = (
@@ -16,9 +25,9 @@ export const socketMiddleware = (
   return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
 
-    return (next) => (action: any) => {
+    return (next) => (action: unknown) => {
       const { dispatch } = store;
-      const { type, payload } = action;
+      const { type, payload } = action as { type: string; payload?: any };
       const { wsInit, onOpen, onClose, onError, onMessage, wsSendMessage } =
         wsActions;
 
@@ -41,7 +50,7 @@ export const socketMiddleware = (
 
         socket.onmessage = (event: MessageEvent) => {
           const { data } = event;
-          const parsedData = JSON.parse(data);
+          const parsedData: TWsMessage = JSON.parse(data);
           const { success, ...restParsedData } = parsedData;
 
           if (success) {
@@ -49,7 +58,7 @@ export const socketMiddleware = (
           }
         };
 
-        if (type === wsSendMessage) {
+        if (wsSendMessage && type === wsSendMessage) {
           const message = payload;
           socket.send(JSON.stringify(message));
         }
