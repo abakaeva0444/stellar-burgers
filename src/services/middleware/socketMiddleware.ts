@@ -1,10 +1,11 @@
 import { Middleware, MiddlewareAPI } from 'redux';
 import { RootState, AppDispatch } from '../store';
+import { TOrder } from '@utils-types';
 
 // Базовые типы для WebSocket сообщений
 export type TWsMessage = {
   success?: boolean;
-  orders: any[];
+  orders: TOrder[];
   total?: number;
   totalToday?: number;
   message?: string;
@@ -27,12 +28,12 @@ export const socketMiddleware = (
 
     return (next) => (action: unknown) => {
       const { dispatch } = store;
-      const { type, payload } = action as { type: string; payload?: any };
+      const { type, payload } = action as { type: string; payload?: string };
       const { wsInit, onOpen, onClose, onError, onMessage, wsSendMessage } =
         wsActions;
 
       if (type === wsInit) {
-        socket = new WebSocket(payload);
+        socket = new WebSocket(payload as string);
       }
 
       if (socket) {

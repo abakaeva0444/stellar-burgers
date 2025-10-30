@@ -44,7 +44,6 @@ const App: FC = () => {
       <div className={styles.app}>
         <AppHeader />
         <Routes location={background || location}>
-          {/* ... остальные маршруты без изменений ... */}
           <Route path='/' element={<ConstructorPage />} />
           <Route path='/feed' element={<Feed />} />
           <Route path='/feed/:number' element={<OrderInfo />} />

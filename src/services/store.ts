@@ -28,8 +28,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['persist/PERSIST'], 
-        ignoredPaths: ['constructor'] 
+        ignoredActions: ['persist/PERSIST'],
+        ignoredPaths: ['constructor']
       }
     })
 });

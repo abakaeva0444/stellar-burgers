@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/store';
 import {
   fetchOrderByNumber,
-  clearOrder
+  clearOrderDetails
 } from '../../services/slices/orderSlice';
 
 export const OrderInfo: FC = () => {
@@ -21,7 +21,7 @@ export const OrderInfo: FC = () => {
     }
 
     return () => {
-      dispatch(clearOrder());
+      dispatch(clearOrderDetails());
     };
   }, [dispatch, number]);
 

@@ -60,57 +60,57 @@ export const OrderCard: FC<TOrderCardProps> = ({
     <Link
       to={`${basePath}/${order.number}`}
       state={{ background: location }}
-      className={styles.link}
+      className={`p-6 mb-4 mr-2 ${styles.order}`}
     >
-      <div className={styles.card}>
-        <div className={styles.header}>
-          <span className='text text_type_digits-default'>#{order.number}</span>
-          <FormattedDate
-            date={new Date(order.createdAt)}
-            className='text text_type_main-default text_color_inactive'
-          />
-        </div>
+      <div className={styles.order_info}>
+        <span className={`text text_type_digits-default ${styles.number}`}>
+          #{String(order.number).padStart(6, '0')}
+        </span>
+        <FormattedDate
+          date={new Date(order.createdAt)}
+          className='text text_type_main-default text_color_inactive'
+        />
+      </div>
 
-        <h3 className={`${styles.title} text text_type_main-medium mt-6`}>
-          {order.name}
-        </h3>
+      <h4 className={`pt-6 text text_type_main-medium ${styles.order_name}`}>
+        {order.name}
+      </h4>
 
-        {showStatus && (
-          <p
-            className={`${styles.status} ${getStatusClass(order.status)} text text_type_main-default mt-2`}
-          >
-            {getStatusText(order.status)}
-          </p>
-        )}
+      {showStatus && (
+        <p
+          className={`${getStatusClass(order.status)} text text_type_main-default mt-2`}
+        >
+          {getStatusText(order.status)}
+        </p>
+      )}
 
-        <div className={`${styles.content} mt-6`}>
-          <div className={styles.ingredients}>
-            {orderIngredients.slice(0, 6).map((ingredient, index) => (
-              <div
-                key={index}
-                className={styles.ingredient}
-                style={{ zIndex: 6 - index }}
-              >
-                <img
-                  src={ingredient?.image}
-                  alt={ingredient?.name}
-                  className={styles.ingredientImage}
-                />
-                {index === 5 && orderIngredients.length > 6 && (
-                  <div className={styles.overlay}>
-                    <span className='text text_type_main-default'>
-                      +{orderIngredients.length - 6}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+      <div className={`pt-6 ${styles.order_content}`}>
+        <ul className={styles.ingredients}>
+          {orderIngredients.slice(0, 6).map((ingredient, index) => (
+            <li
+              className={styles.img_wrap}
+              style={{ zIndex: 6 - index }}
+              key={index}
+            >
+              <img
+                src={ingredient?.image}
+                alt={ingredient?.name}
+                className={styles.img}
+              />
+              {index === 5 && orderIngredients.length > 6 && (
+                <span className={`text text_type_digits-default ${styles.remains}`}>
+                  +{orderIngredients.length - 6}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
 
-          <div className={styles.price}>
-            <span className='text text_type_digits-default'>{total}</span>
-            <CurrencyIcon type='primary' />
-          </div>
+        <div>
+          <span className={`text text_type_digits-default pr-1 ${styles.order_total}`}>
+            {total}
+          </span>
+          <CurrencyIcon type='primary' />
         </div>
       </div>
     </Link>
