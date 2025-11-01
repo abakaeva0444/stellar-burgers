@@ -20,20 +20,24 @@ export const OrderCard: FC<TOrderCardProps> = ({
   const location = useLocation();
   const { ingredients } = useSelector((store) => store.ingredients);
 
-  const orderIngredients = useMemo(() => {
-    return order.ingredients
-      .map((id: string) =>
-        ingredients.find((ingredient: TIngredient) => ingredient._id === id)
-      )
-      .filter(Boolean);
-  }, [order.ingredients, ingredients]);
+  const orderIngredients = useMemo(
+    () =>
+      order.ingredients
+        .map((id: string) =>
+          ingredients.find((ingredient: TIngredient) => ingredient._id === id)
+        )
+        .filter(Boolean),
+    [order.ingredients, ingredients]
+  );
 
-  const total = useMemo(() => {
-    return orderIngredients.reduce(
-      (sum: number, ingredient) => sum + (ingredient?.price || 0),
-      0
-    );
-  }, [orderIngredients]);
+  const total = useMemo(
+    () =>
+      orderIngredients.reduce(
+        (sum: number, ingredient) => sum + (ingredient?.price || 0),
+        0
+      ),
+    [orderIngredients]
+  );
 
   const getStatusText = (status: string) => {
     switch (status) {
@@ -48,9 +52,8 @@ export const OrderCard: FC<TOrderCardProps> = ({
     }
   };
 
-  const getStatusClass = (status: string) => {
-    return status === 'done' ? styles.statusDone : '';
-  };
+  const getStatusClass = (status: string) =>
+    status === 'done' ? styles.statusDone : '';
 
   const basePath = location.pathname.includes('/profile')
     ? '/profile/orders'
@@ -98,7 +101,9 @@ export const OrderCard: FC<TOrderCardProps> = ({
                 className={styles.img}
               />
               {index === 5 && orderIngredients.length > 6 && (
-                <span className={`text text_type_digits-default ${styles.remains}`}>
+                <span
+                  className={`text text_type_digits-default ${styles.remains}`}
+                >
                   +{orderIngredients.length - 6}
                 </span>
               )}
@@ -107,7 +112,9 @@ export const OrderCard: FC<TOrderCardProps> = ({
         </ul>
 
         <div>
-          <span className={`text text_type_digits-default pr-1 ${styles.order_total}`}>
+          <span
+            className={`text text_type_digits-default pr-1 ${styles.order_total}`}
+          >
             {total}
           </span>
           <CurrencyIcon type='primary' />

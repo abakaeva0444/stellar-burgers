@@ -20,10 +20,9 @@ export type TWsActions = {
   onMessage: (data: TWsMessage) => { type: string; payload: TWsMessage };
 };
 
-export const socketMiddleware = (
-  wsActions: TWsActions
-): Middleware<{}, RootState> => {
-  return (store: MiddlewareAPI<AppDispatch, RootState>) => {
+export const socketMiddleware =
+  (wsActions: TWsActions): Middleware<{}, RootState> =>
+  (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
 
     return (next) => (action: unknown) => {
@@ -68,4 +67,3 @@ export const socketMiddleware = (
       next(action);
     };
   };
-};

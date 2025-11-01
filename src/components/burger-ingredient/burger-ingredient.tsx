@@ -33,13 +33,13 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> = ({
       <div className={styles.item} ref={dragRef}>
         {count > 0 && <Counter count={count} size='default' />}
         <img src={ingredient.image} alt={ingredient.name} />
-        <div className={`${styles.price} mt-1 mb-1`}>
-          <span className='text text_type_digits-default'>
+        <div className={`${styles.cost} mt-2 mb-2`}>
+          <span className='text text_type_digits-default mr-2'>
             {ingredient.price}
           </span>
           <CurrencyIcon type='primary' />
         </div>
-        <p className={`${styles.name} text text_type_main-default`}>
+        <p className={`text text_type_main-default ${styles.text}`}>
           {ingredient.name}
         </p>
       </div>

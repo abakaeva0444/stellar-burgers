@@ -15,12 +15,10 @@ const constructorSlice = createSlice({
   name: 'constructor',
   initialState,
   reducers: {
-    addBun: (state, action: PayloadAction<TIngredient>) => {
-      return {
-        ...state,
-        bun: action.payload
-      };
-    },
+    addBun: (state, action: PayloadAction<TIngredient>) => ({
+      ...state,
+      bun: action.payload
+    }),
     addIngredient: (state, action: PayloadAction<TIngredient>) => {
       if (action.payload.type === 'bun') {
         return state;
@@ -38,9 +36,7 @@ const constructorSlice = createSlice({
         ingredients: [...currentIngredients, newIngredient]
       };
     },
-    clearConstructor: () => {
-      return initialState;
-    }
+    clearConstructor: () => initialState
   }
 });
 
