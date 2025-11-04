@@ -1,12 +1,24 @@
 import { forwardRef, useMemo } from 'react';
+import { useDispatch } from '../../services/store';
 import { TIngredientsCategoryProps } from './type';
 import { TIngredient } from '@utils-types';
 import { IngredientsCategoryUI } from '../ui/ingredients-category';
+import { addBun, addIngredient } from '../../services/slices/constructorSlice';
 
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
   TIngredientsCategoryProps
 >(({ title, titleRef, ingredients }, ref) => {
+  const dispatch = useDispatch();
+
+  const handleAdd = (ingredient: TIngredient) => {
+    if (ingredient.type === 'bun') {
+      dispatch(addBun(ingredient));
+    } else {
+      dispatch(addIngredient(ingredient));
+    }
+  };
+
   /** TODO: взять переменную из стора */
   const burgerConstructor = {
     bun: {
@@ -32,6 +44,7 @@ export const IngredientsCategory = forwardRef<
       titleRef={titleRef}
       ingredients={ingredients}
       ingredientsCounters={ingredientsCounters}
+      handleAdd={handleAdd}
       ref={ref}
     />
   );
