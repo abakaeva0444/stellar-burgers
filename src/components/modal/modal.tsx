@@ -14,6 +14,7 @@ export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
 
     document.addEventListener('keydown', handleEsc);
     return () => {
+      <div data-testid='modal' />;
       document.removeEventListener('keydown', handleEsc);
     };
   }, [onClose]);

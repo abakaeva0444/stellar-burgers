@@ -28,7 +28,11 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   });
 
   return (
-    <section className={styles.burger_constructor} ref={dropTarget}>
+    <section
+      className={styles.burger_constructor}
+      ref={dropTarget}
+      data-testid='constructor'
+    >
       {constructorItems.bun ? (
         <div className={`${styles.element} mb-4 mr-4`}>
           <ConstructorElement
@@ -54,7 +58,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
                 ingredient={item}
                 index={index}
                 totalItems={constructorItems.ingredients.length}
-                key={item.id} // ИСПРАВЛЕНО: item._id -> item.id
+                key={item.id}
               />
             )
           )
