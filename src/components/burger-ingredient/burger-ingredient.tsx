@@ -30,7 +30,11 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> = ({
       state={{ background: location }}
       className={styles.article}
     >
-      <div className={styles.container} ref={dragRef}>
+      <div
+        className={styles.container}
+        ref={dragRef}
+        data-testid={`ingredient-${ingredient._id}`}
+      >
         {count > 0 && <Counter count={count} size='default' />}
         <img src={ingredient.image} alt={ingredient.name} />
         <div className={`${styles.cost} mt-2 mb-2`}>

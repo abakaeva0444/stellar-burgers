@@ -66,7 +66,7 @@ export const OrderInfo: FC = () => {
 
     return {
       ...order,
-      ingredientsInfo: ingredientsInfoArray, // Теперь это массив
+      ingredientsInfo: ingredientsInfoArray,
       date,
       total,
       number: order.number,

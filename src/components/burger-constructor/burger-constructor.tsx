@@ -32,7 +32,7 @@ export const BurgerConstructor: FC = () => {
   // Очищаем конструктор при успешном создании заказа
   useEffect(() => {
     if (orderModalData && orderModalData.number) {
-      dispatch(clearConstructor()); // ОЧИСТКА ПРИ УСПЕШНОМ ОТВЕТЕ СЕРВЕРА
+      dispatch(clearConstructor());
     }
   }, [orderModalData, dispatch]);
 
@@ -65,7 +65,7 @@ export const BurgerConstructor: FC = () => {
 
   // При закрытии модалки очищаем только данные заказа
   const closeOrderModal = () => {
-    dispatch(clearOrder()); // ОЧИСТКА ТОЛЬКО ДАННЫХ ЗАКАЗА
+    dispatch(clearOrder());
   };
 
   const price = useMemo(

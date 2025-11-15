@@ -5,7 +5,6 @@ import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 
 export const BurgerIngredients: FC = () => {
-  // ЗАМЕНИТЕ пустые массивы на данные из store
   const { ingredients } = useSelector((store) => store.ingredients);
 
   // ФИЛЬТРУЙТЕ ингредиенты по типам
