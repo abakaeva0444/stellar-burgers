@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "name": "Space бургер",
+  "order": {
+    "number": 12345,
+    "name": "Space бургер",
+    "status": "done",
+    "ingredients": []
+  }
+}
